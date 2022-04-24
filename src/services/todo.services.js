@@ -7,16 +7,19 @@ const addNewTodo = async (text) => {
   if (typeof text !== 'string') {
     throw new Error('Text should be a string');
   }
-  const newTweet = await Todos.create({
+  const newTodo = await Todos.create({
     note: text,
     createdAt: new Date(),
     updatedAt: new Date(),
   });
-  return newTweet;
+  return newTodo;
 };
 const getTodos = async () => {
-  const tweets = await Todos.findAll({ });
-  return tweets;
+  const todo = await Todos.findAll({ });
+  if (todo.length === 0) {
+    throw new Error('No todos found');
+  }
+  return todo;
 };
 
 module.exports = {
